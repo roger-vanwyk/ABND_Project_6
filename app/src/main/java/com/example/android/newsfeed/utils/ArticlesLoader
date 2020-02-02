@@ -1,0 +1,27 @@
+package com.example.android.newsfeed.utils;
+
+import android.content.Context;
+
+import androidx.loader.content.AsyncTaskLoader;
+
+import com.example.android.newsfeed.model.Articles;
+
+import java.util.ArrayList;
+
+// Created on 24/01/2020 by Roger van Wyk.
+
+public class ArticlesLoader extends AsyncTaskLoader<ArrayList<Articles>> {
+
+    private String dataSource;
+
+    public ArticlesLoader(Context context, String dataSource) {
+        super(context);
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public ArrayList<Articles> loadInBackground() {
+        JSONParser jsonParser = new JSONParser(this.dataSource);
+        return jsonParser.getResponseData();
+    }
+}

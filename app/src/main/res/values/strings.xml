@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NEWS 24/7</string>
+    <string name="bad_server">Bad response from the server</string>
+    <string name="network_issue">Are you still connected to the internet?</string>
+    <string name="find_articles">Search the globe</string>
+    <string name="no_news_found">No News Reported</string>
+    <string name="use_keywords">Type keywords to search</string>
+    <string name="type">Type  %1$s</string>
+    <string name="date">Date  %1$s</string>
+</resources>

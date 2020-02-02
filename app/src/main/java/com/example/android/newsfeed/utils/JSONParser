@@ -1,0 +1,51 @@
+package com.example.android.newsfeed.utils;
+
+// Created on 24/01/2020 by Roger van Wyk.
+
+import com.example.android.newsfeed.model.Articles;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+class JSONParser {
+
+    private String dataSource;
+
+    JSONParser(String dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    /* Generates a list of products and parses the JSON string,
+    * and returns a product ArrayList
+    **/
+
+    ArrayList<Articles> getResponseData() {
+        ArrayList<Articles> articlesList = new ArrayList<> ( );
+        String responseJSON = QueryLoader.getResponseString(this.dataSource);
+        if (responseJSON == null) {
+            return null;
+        }
+        try {
+            JSONObject reader = new JSONObject(responseJSON);
+            JSONObject response = reader.getJSONObject("response");
+            JSONArray resultArray = response.getJSONArray("results");
+            for(int i=0; i< resultArray.length(); i++) {
+                JSONObject articles = resultArray.getJSONObject(i);
+                String title = articles.getString("webTitle");
+                String type = articles.getString("type");
+                String date = articles.getString("webPublicationDate");
+                String category = articles.getString("sectionName");
+                String url =  articles.getString("webUrl");
+                com.example.android.newsfeed.model.Articles n = new Articles (category, title, type, date, url);
+                articlesList.add(n);
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+            return new ArrayList<> ( );
+        }
+        return articlesList;
+    }
+}

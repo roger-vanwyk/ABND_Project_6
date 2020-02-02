@@ -1,0 +1,33 @@
+package com.example.android.newsfeed.adapters;
+
+// Created on 24/01/2020 by Roger van Wyk.
+
+import androidx.appcompat.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.android.newsfeed.R;
+import com.example.android.newsfeed.models.Articles;
+
+public class ArticlesViewHolder extends RecyclerView.ViewHolder {
+
+    public TextView articlesCategory, articlesTitle, articlesType, articlesDate;
+
+    public ArticlesViewHolder(View itemView) {
+        super(itemView);
+
+        articlesCategory = (TextView) itemView.findViewById(R.id.category);
+        articlesTitle = (TextView) itemView.findViewById(R.id.articles_title);
+        articlesType = (TextView) itemView.findViewById(R.id.type);
+        articlesDate = (TextView) itemView.findViewById(R.id.date);
+    }
+
+    public void bind(final Articles articles, final RecyclerViewAdapter.OnItemClickListener listener) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(articles);
+            }
+        });
+    }
+}
